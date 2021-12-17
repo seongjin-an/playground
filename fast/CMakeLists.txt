@@ -31,6 +31,7 @@ add_executable(nullPtr src/pointer/nullPtr.cpp)
 add_executable(voidPtr src/pointer/voidPtr.cpp)
 add_executable(vector src/pointer/vector.cpp)
 add_executable(ref src/pointer/ref.cpp)
+add_executable(double src/pointer/double.cpp)
 
 add_executable(func src/function/argFunc.cpp)
 add_executable(recursive src/function/recursive.cpp)
@@ -47,3 +48,12 @@ add_executable(functionPointer2 src/function/functionPointer2.cpp)
 add_executable(functionPointer3 src/function/functionPointer3.cpp)
 add_executable(agreementCallingFunc src/function/agreementCallingFunc.cpp)
 add_executable(inline src/function/inline.cpp)
+
+
+add_executable(build src/build/build.cpp)
+add_library(sumLib src/build/sum.cpp)
+target_link_libraries(build sumLib)
+
+add_executable(ext src/build/ext.cpp)
+add_library(ext2 src/build/ext2.cpp)
+target_link_libraries(ext ext2)
