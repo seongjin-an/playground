@@ -1,6 +1,6 @@
 //
 // Created by seongjin on 21. 11. 21..
-// new oper
+// new basicOper
 
 #include <iostream>
 int main(){
