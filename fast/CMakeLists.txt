@@ -81,3 +81,32 @@ add_library(StaticLib src/obj/staticMember/libs/Static.cpp)
 target_link_libraries(static StaticLib)
 
 add_executable(memberFunctionPointer src/obj/memberFunctionPointer.cpp)
+
+add_executable(overloadingOperation src/operation/overloadingOperation.cpp)
+add_executable(friend src/operation/friend.cpp)
+
+add_executable(overloadingComparison src/operation/comparison/overloadingComparison.cpp)
+add_library(compareLib src/operation/comparison/libs/Comparison.cpp)
+include_directories(src/operation/comparison/includes)
+target_link_libraries(overloadingComparison compareLib)
+
+add_executable(overloadingLogical src/operation/logical/overloadingLogical.cpp)
+add_library(logicalLib src/operation/logical/libs/Logical.cpp)
+include_directories(src/operation/logical/includes)
+target_link_libraries(overloadingLogical logicalLib)
+
+add_executable(overloadingIO src/operation/io/main.cpp)
+add_library(ioLib src/operation/io/libs/Io.cpp)
+include_directories(src/operation/io/includes)
+target_link_libraries(overloadingIO ioLib)
+
+add_executable(overlaodingSubscript src/operation/subscript/main.cpp)
+add_library(subscriptLib src/operation/subscript/libs/Subscript.cpp)
+add_library(stringLib src/operation/subscript/libs/String.cpp)
+include_directories(src/operation/subscript/includes)
+target_link_libraries(overlaodingSubscript subscriptLib stringLib)
+
+add_executable(hashtable src/operation/hashtable/main.cpp)
+add_library(hashtableLib src/operation/hashtable/libs/Hashtable.cpp)
+include_directories(src/operation/hashtable/includes)
+target_link_libraries(hashtable hashtableLib)
