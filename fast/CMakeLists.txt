@@ -110,3 +110,18 @@ add_executable(hashtable src/operation/hashtable/main.cpp)
 add_library(hashtableLib src/operation/hashtable/libs/Hashtable.cpp)
 include_directories(src/operation/hashtable/includes)
 target_link_libraries(hashtable hashtableLib)
+
+add_executable(substitutionCopy src/operation/substitutionCopy/main.cpp)
+add_library(substitutionCopyLib src/operation/substitutionCopy/libs/SubstitutionCopy.cpp)
+include_directories(src/operation/substitutionCopy/includes)
+target_link_libraries(substitutionCopy substitutionCopyLib)
+
+add_executable(conversion src/operation/conversion/main.cpp)
+add_library(conversionLib src/operation/conversion/libs/Conversion.cpp)
+include_directories(src/operation/conversion/includes)
+target_link_libraries(conversion conversionLib)
+
+add_executable(function src/operation/function/main.cpp)
+add_library(functionLib src/operation/function/libs/Function.cpp)
+include_directories(src/operation/function/includes)
+target_link_libraries(function functionLib)
