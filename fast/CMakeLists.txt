@@ -125,3 +125,14 @@ add_executable(function src/operation/function/main.cpp)
 add_library(functionLib src/operation/function/libs/Function.cpp)
 include_directories(src/operation/function/includes)
 target_link_libraries(function functionLib)
+
+add_executable(inheritanceBase src/inheritance/base/main.cpp)
+add_executable(inheritanceBase2 src/inheritance/base/main2.cpp)
+add_executable(inheritanceBase3 src/inheritance/base/main3.cpp)
+
+add_executable(virtualFunction src/inheritance/virtualFunction/main.cpp)
+add_executable(virtualFunction2 src/inheritance/virtualFunction/main2.cpp)
+add_executable(virtualFunction3 src/inheritance/virtualFunction/main3.cpp)
+
+add_executable(staticDynamicBind src/inheritance/staticDynamicBind/main.cpp)
+add_executable(staticDynamicBind2 src/inheritance/staticDynamicBind/main2.cpp)
