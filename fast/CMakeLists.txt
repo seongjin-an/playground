@@ -141,3 +141,5 @@ add_executable(abstract src/inheritance/abstract/main.cpp)
 add_executable(accessModifier src/inheritance/accessModifier/main.cpp)
 add_executable(multiple src/inheritance/multiple/main.cpp)
 add_executable(multiple2 src/inheritance/multiple/main2.cpp)
+
+add_executable(staticCast src/cast/staticCast.cpp)
