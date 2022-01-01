@@ -154,3 +154,6 @@ add_executable(tryCatch2 src/exception/tryCatch2.cpp)
 add_executable(tryCatch3 src/exception/tryCatch3.cpp)
 add_executable(raii src/exception/raii.cpp)
 add_executable(noexcept src/exception/noexcept.cpp)
+
+add_executable(funcTemplate src/template/funcTemplate.cpp)
+add_executable(classTemplate src/template/classTemplate.cpp)
