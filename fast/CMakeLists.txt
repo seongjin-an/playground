@@ -157,3 +157,16 @@ add_executable(noexcept src/exception/noexcept.cpp)
 
 add_executable(funcTemplate src/template/funcTemplate.cpp)
 add_executable(classTemplate src/template/classTemplate.cpp)
+add_executable(specializationTemplate src/template/specializationTemplate.cpp)
+include_directories(src/template)
+add_library(swapLib src/template/swap.cpp)
+add_executable(specificTemplate src/template/specificTemplate.cpp)
+target_link_libraries(specificTemplate swapLib)
+add_executable(variableArgument src/template/variableArgument.cpp)
+add_executable(metaprogramming src/template/metaprogramming.cpp)
+
+add_executable(typetraits src/type/typetraits.cpp)
+add_executable(typetraits2 src/type/typetraits2.cpp)
+add_executable(rtti src/type/rtti.cpp)
+
+add_executable(sequenceContainer1 src/stl/sequenceContainer.cpp)
