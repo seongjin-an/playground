@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 20)
 
 add_executable(printf src/stdio/printf.cpp)
 add_executable(scanf src/stdio/scanf.cpp)
@@ -170,3 +170,7 @@ add_executable(typetraits2 src/type/typetraits2.cpp)
 add_executable(rtti src/type/rtti.cpp)
 
 add_executable(sequenceContainer1 src/stl/sequenceContainer.cpp)
+add_executable(sequenceContainer2 src/stl/sequenceContainer2.cpp)
+add_executable(orderedAssociateContainer src/stl/orderedAssociateContainer.cpp)
+add_executable(orderedAssociateContainer2 src/stl/orderedAssociateContainer2.cpp)
+add_executable(orderedAssociateContainer3 src/stl/orderedAssociateContainer3.cpp)
