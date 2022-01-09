@@ -174,3 +174,13 @@ add_executable(sequenceContainer2 src/stl/sequenceContainer2.cpp)
 add_executable(orderedAssociateContainer src/stl/orderedAssociateContainer.cpp)
 add_executable(orderedAssociateContainer2 src/stl/orderedAssociateContainer2.cpp)
 add_executable(orderedAssociateContainer3 src/stl/orderedAssociateContainer3.cpp)
+add_executable(unorderdAssociateContainer src/stl/unorderedAssociateContainer.cpp)
+
+add_executable(iterator1 src/stl/iterator/iterator.cpp)
+include_directories(src/stl/iterator/includes)
+add_library(rangeLib src/stl/iterator/libs/ranges.cpp)
+target_link_libraries(iterator1 rangeLib)
+
+add_executable(iterator2 src/stl/iterator/iterator2.cpp)
+add_executable(algorithm1 src/stl/algorithm.cpp)
+add_executable(algorithm2 src/stl/algorithm2.cpp)
