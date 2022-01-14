@@ -184,3 +184,6 @@ target_link_libraries(iterator1 rangeLib)
 add_executable(iterator2 src/stl/iterator/iterator2.cpp)
 add_executable(algorithm1 src/stl/algorithm.cpp)
 add_executable(algorithm2 src/stl/algorithm2.cpp)
+
+add_executable(auto1 src/modern/auto1.cpp)
+add_executable(auto2 src/modern/auto2.cpp)
