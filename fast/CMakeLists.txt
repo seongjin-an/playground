@@ -187,3 +187,6 @@ add_executable(algorithm2 src/stl/algorithm2.cpp)
 
 add_executable(auto1 src/modern/auto1.cpp)
 add_executable(auto2 src/modern/auto2.cpp)
+add_executable(decltype1 src/modern/decltype1.cpp)
+add_executable(lambda src/modern/lambda.cpp)
+add_executable(constexpr src/modern/constexpr.cpp)
