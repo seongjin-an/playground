@@ -201,3 +201,5 @@ add_executable(stdThread3 src/modern/stdThread3.cpp)
 add_executable(futurePromiseAsync src/modern/futurePromise.cpp)
 add_executable(packagedTask src/modern/packagedTask.cpp)
 add_executable(async src/modern/async.cpp)
+
+add_executable(concepts src/20/concepts.cpp)
