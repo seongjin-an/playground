@@ -1,0 +1,4 @@
+add_executable(cin cin.cpp)
+add_executable(cinFlush cinFlush.cpp)
+add_executable(cinFlush2 cinFlush2.cpp)
+add_executable(cinBoolalpha cinBoolalpha.cpp)
