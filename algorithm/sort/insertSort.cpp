@@ -41,7 +41,7 @@ void f(int (&arr)[N])
         std::cout << arr[i] << std::endl;
     }
 }
-int main() {
+int main() { 
     std::cout << "hello" << std::endl;
     std::array<int, 8> array{80, 50, 70, 10, 60, 20, 40, 30};
 
