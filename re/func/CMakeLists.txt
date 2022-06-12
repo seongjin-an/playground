@@ -1,1 +1,6 @@
 add_executable(overloading overloading.cpp)
+add_executable(funcArg arg/funcArg.cpp)
+add_executable(defaultArg arg/defaultArg.cpp)
+add_executable(inline inline.cpp)
+add_executable(callbyValue1 callbyValue/callByValue1.cpp)
+add_executable(callbyValue2 callbyValue/callbyValue2.cpp)
