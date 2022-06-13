@@ -1,0 +1,6 @@
+add_executable(basicClass basicClass.cpp)
+add_executable(const const.cpp)
+add_executable(constructor constructor.cpp)
+add_executable(destructor destructor.cpp)
+add_executable(destructor2 destructor2.cpp)
+add_executable(this this.cpp)
