@@ -4,3 +4,7 @@ add_executable(defaultArg arg/defaultArg.cpp)
 add_executable(inline inline.cpp)
 add_executable(callbyValue1 callbyValue/callByValue1.cpp)
 add_executable(callbyValue2 callbyValue/callbyValue2.cpp)
+
+add_executable(callByRef1 callbyRef/callByRef1.cpp)
+add_executable(callByRef2 callbyRef/callByRef2.cpp)
+add_executable(callByRef3 callbyRef/callByRef3.cpp)
