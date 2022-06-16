@@ -11,7 +11,8 @@ private:
 public:
     void insertHeap(int input) {
         int _size = ++SIZE;
-        while ((_size != 1) && (input > heapArr[_size / 2])) {
+        while ((_size != 1) && (input > heapArr[_size / 2])) { // max heap
+//        while((_size != 1) && (input < heapArr[_size / 2])){ // min heap
             heapArr[_size] = heapArr[_size / 2];
             _size /= 2;
         }
@@ -33,10 +34,12 @@ public:
         child = 2;
 
         while (child <= SIZE) {
-            if ((child < SIZE) && (heapArr[child] < heapArr[child + 1])) {
+            if ((child < SIZE) && (heapArr[child] < heapArr[child + 1])) { // max heap
+//            if ((child < SIZE) && (heapArr[child] > heapArr[child + 1])) { // min heap
                 child++;
             }
-            if (temp >= heapArr[child]) break;
+            if (temp >= heapArr[child]) break; // max heap
+//            if (temp <= heapArr[child]) break; // min heap
             heapArr[parent] = heapArr[child];
             parent = child;
             child *= 2;
@@ -63,4 +66,17 @@ int main() {
     h.insertHeap(20);
 
     h.printHeap();
+
+    HeapSort h2;
+    h2.insertHeap(50);
+    h2.insertHeap(24);
+    h2.insertHeap(37);
+    h2.insertHeap(65);
+    h2.insertHeap(57);
+    h2.insertHeap(43);
+    h2.insertHeap(67);
+    h2.insertHeap(19);
+    h2.insertHeap(59);
+
+    h2.printHeap();
 }
