@@ -30,7 +30,9 @@ private:
     }
 
 public:
-    Proxy(RealSubject *real_subject) : real_subject_(new RealSubject(*real_subject)) {}
+    Proxy(RealSubject *real_subject) : real_subject_(new RealSubject(*real_subject)) {
+        std::cout << "real_subject address2: " << real_subject << std::endl;
+    }
 
     ~Proxy() {
         delete real_subject_;
@@ -38,6 +40,7 @@ public:
 
     void Request() const override {
         if (this->CheckAccess()) {
+            std::cout << "real_subject_ address: " << real_subject_ << std::endl;
             this->real_subject_->Request();
             this->LogAccess();
         }
@@ -53,6 +56,7 @@ void ClientCode(const Subject &subject) {
 int main() {
     std::cout << "Client:Executing the client code with a real subject:" << std::endl;
     RealSubject *real_subject = new RealSubject;
+    std::cout << "real_subject address: " << real_subject << std::endl;
     ClientCode(*real_subject);
     std::cout << std::endl;
     std::cout << "Client:Executing the same client code with a proxy" << std::endl;
