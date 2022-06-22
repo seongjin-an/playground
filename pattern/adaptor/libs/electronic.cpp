@@ -24,6 +24,6 @@ void SocketAdaptor::powerOn() {
     electronic220V->connect();
 }
 
-void connect(Electronic110V *electronic110V) {
-    electronic110V->powerOn();
+void connect(Electronic110V &electronic110V) {
+    electronic110V.powerOn();
 }

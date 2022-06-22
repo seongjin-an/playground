@@ -19,17 +19,17 @@ public:
 
 class HairDryer : public Electronic110V {
 public:
-    void powerOn() override;
+    void powerOn() ;
 };
 
 class Cleaner : public Electronic220V {
 public:
-    void connect() override;
+    void connect() ;
 };
 
 class AirConditioner : public Electronic220V {
 public:
-    void connect() override;
+    void connect() ;
 };
 
 class SocketAdaptor : public Electronic110V {
@@ -38,8 +38,8 @@ private:
 public:
     SocketAdaptor(Electronic220V *_electronic220V);
 
-    void powerOn() override;
+    void powerOn() ;
 };
-void connect(Electronic110V *electronic110V);
+void connect(Electronic110V &electronic110V);
 
 #endif //PLAYGROUND_ELECTRONIC_H

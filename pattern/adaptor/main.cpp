@@ -6,13 +6,18 @@
 
 int main() {
     HairDryer hairDryer;
-    connect(&hairDryer);
+    connect(hairDryer);
 
     Cleaner cleaner;
     Electronic110V *adaptor = new SocketAdaptor(&cleaner);
-    connect(adaptor);
+    connect(*adaptor);
 
     AirConditioner airConditioner;
     Electronic110V *airAdaptor = new SocketAdaptor(&airConditioner);
-    connect(airAdaptor);
+    connect(*airAdaptor);
+
+    SocketAdaptor socketAdaptor(&airConditioner);
+    Electronic110V &imsi = socketAdaptor;
+    connect(imsi);
+
 }
