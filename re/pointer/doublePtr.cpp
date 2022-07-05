@@ -28,3 +28,6 @@ int main(int argc, char *argv[]){
     func2(argc, argv);
     func3(argc, strs);
 }
+/*
+ * g++ imsi.cpp -o imsi
+ */
