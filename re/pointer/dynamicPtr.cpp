@@ -63,6 +63,10 @@ int main() {
             new Person{68.f, 177.f},
             new Person{50.f, 165.f}
     };
+    std::cout << persons << std::endl;
+    for(Person *ps: persons){
+        std::cout << ps << std::endl;
+    }
 
     for(Person *ps: persons){
         ps->weight = 0.0f;
