@@ -79,7 +79,7 @@ public:
     }
 
     // #11
-    Vector &operator--(int){
+    Vector operator--(int){
         Vector temp = *this;
         --(*this);
         return temp;
@@ -91,7 +91,7 @@ public:
 
     friend Vector operator*(float v0, const Vector &v1);
 };
-
+//operator+ must be a unary or binary operator (has 3 parameters)
 Vector operator*(float v0, const Vector &v1){
     return Vector{v0 * v1.x, v0 * v1.y, v0 * v1.z};
 }
