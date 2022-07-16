@@ -1,0 +1,6 @@
+include_directories(includes)
+#link_directories(libs)
+add_library(compareLib libs/compare.cpp)
+add_executable(compare main.cpp)
+target_link_libraries(compare compareLib)
+#target_link_directories(compare Compare)
