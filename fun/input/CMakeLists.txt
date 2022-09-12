@@ -1,0 +1,5 @@
+add_executable(1_input.cpp 1_input.cpp)
+add_executable(2_input.cpp 2_input.cpp)
+add_executable(3_input.cpp 3_input.cpp)
+add_executable(4_input_getline.cpp 4_input_getline.cpp)
+add_executable(5_input.cpp 5_input.cpp)
