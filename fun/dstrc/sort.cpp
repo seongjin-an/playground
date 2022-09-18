@@ -32,7 +32,7 @@ int main() {
     std::sort(a.begin(), a.end());
     for(int i : a) std::cout << i << ' ';
     std::cout << '\n';
-    
+
     //내림차순
     std::cout << "sort b descending" << '\n';
     std::sort(b, b + 5, std::greater<int>());
