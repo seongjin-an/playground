@@ -39,16 +39,22 @@ int main() {
 
     std::vector<std::vector<int>> checked;
     std::vector<std::vector<int>> v4(10, std::vector<int>(10,0));
-//    std::fill(v4.begin(), v4.end(), 0);
+    std::cout << "//////////////////////////////////////////////////" << '\n';
+    for(int i = 0; i < v4.size(); i++) {
+        for(int j = 0; j < v4[i].size(); j++) {
+            std::cout << v4[i][j] << " ";
+        }
+        std::cout << '\n';
+    }
 
     int dp[10] = {0, };
     int dp2[10][10] = {{0,}};
-//    for(int i = 0; i < 10; i++) {
-//        for(int j = 0; j < 10; j++) {
-//            std::cout << dp2[i][j] << " ";
-//        }
-//        std::cout << '\n';
-//    }
+    for(int i = 0; i < 10; i++) {
+        for(int j = 0; j < 10; j++) {
+            std::cout << dp2[i][j] << " ";
+        }
+        std::cout << '\n';
+    }
 //    for(int i = 0; i < 10; i ++) std::fill(dp[i], dp[i] + 10, 0);
 //    int arr[2][5];
 //    std::fill(&arr[0][0], &arr[0][0] + 2 * 5, 0);
