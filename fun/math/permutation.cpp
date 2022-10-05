@@ -20,8 +20,10 @@ void makePermutation(int n, int r, int depth, std::vector<int> &v) {
         return;
     }
     for (int i = depth; i < n; i++) {
+//        std::cout << n << " : " << r << " : " << depth << '\n';
         std::swap(v[i], v[depth]);
         makePermutation(n, r, depth + 1, v);
+//        std::cout << n << " : " << r << " : " << depth << '\n';
         std::swap(v[i], v[depth]);
     }
     return;
