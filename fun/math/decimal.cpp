@@ -6,6 +6,7 @@
 
 using namespace std;
 
+// 소수
 bool check(int n) {
     if (n <= 1) return 0;
     if (n == 2) return 1;
