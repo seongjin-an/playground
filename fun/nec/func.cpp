@@ -9,7 +9,7 @@ private:
     std::string name;
 public:
     Person() {
-        std::cout << "Person is constructed" << '\n'; 
+        std::cout << "Person is constructed" << '\n';
     }
     void setName(std::string _name) {
         this->name = _name;
