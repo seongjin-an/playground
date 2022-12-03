@@ -8,3 +8,4 @@ add_executable(accumulate.cpp accumulate.cpp)
 add_executable(func.cpp func.cpp)
 
 add_executable(max_element.cpp max_element.cpp)
+add_executable(partRotate.cpp partRotate.cpp)
