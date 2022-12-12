@@ -1,4 +1,4 @@
-
+//g++ -std=c++14 -Wall lecture/test.cpp -o ./build/test.out
 #include <iostream>
 
 using namespace std;
