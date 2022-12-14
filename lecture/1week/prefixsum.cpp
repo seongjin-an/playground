@@ -1,4 +1,4 @@
-// prefix sum d
+// prefix sum 누적합 구하기
 #include <iostream>
 
 using namespace std;
