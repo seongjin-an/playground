@@ -1,1 +1,221 @@
+## basic
 g++ -std=c++14 -Wall a.cpp -o a.out
+
+## CMake (https://modoocode.com/332 참고)
+CMake 를 사용하는 모든 프로젝트에는 반드시 프로젝트 최상위 디렉토리에 CMakeLists.txt 파일이 있어야 한다.
+해당 파일에는 CMake 가 빌드 파일을 생성하는데 필요한 정보들이 들어있다.
+보통의 컴파일 과정은 다음과 같이 진행된다.
+CMakeLists.txt -> Makefile -> 실행파일
+            (CMake)      (make)
+물론 꼭 Makefile 을 만들 필요는 없고 원하는 빌드 프로그램을 선택할 수 있다.
+
+## CMake 프로그램의 최소 버전
+cmake_minimum_required(VERSION 3.16)
+
+## 프로젝트 정보
+project(
+    CUSTOM_PACKAGE
+    VERSION 0.1
+    DESCRIPTION "EXAMPLE"
+    LANGUAGES CXX#c: C / cpp: CXX
+)
+
+## 실행파일 만들기 
+우선 main.cpp 를 작성하고 add_executable 을 다음처럼 한다.
+add_executable(program main.cpp)
+
+CMakeLists.txt, main.cpp 는 같은 경로에 있어야 하며, 
+
+build 디렉토리 만들고 
+cmake [경로]
+(해당 경로로 이동 후)make
+
+add_executable (<실행 파일 이름> <소스1> <소스2> ... <소스들>)
+main.cpp 말고도 다른 소스파일이 필요하다면 뒤에 주르륵 적으면 된다.
+
+
+## 컴파일 옵션 지정하기
+만약에 컴파일 옵션을 지정하고 싶다면 어떻게 해야할까
+target_compile_options 명령을 사용하면 된다.
+target_compile_options(<실행 파일 이름> PUBLIC <컴파일 옵션1> <컴파일 옵션2> ...)
+
+예를 들어서
+target_compile_options(program PUBLIC -Wall -Werror)
+위 경우 program 을 빌드할 때 컴파일 옵션으로 -Wall(모든 경고 표시)과 -Werror(경고는 컴파일 오류로 간주)을 준다는 의미이다.
+중간에 PUBLIC 은 뒤에서 설명, 실행 파일을 빌드할 때에는 그닥 중요하지 않음
+(PUBLIC 말고도 INTERFACE 와 PRIVATE 도 있는데 어느 옵션을 사용해도 큰 상관은? 없다 적어도 실행 파일을 만드는 단계에서는)
+
+컴파일 옵션이 잘 돌아가는지 보려면 아래와 같이 main.cpp 를 수정하자.
+#include <iostream>
+#include "foo.h"
+
+int main() {
+    int i;
+    std::cout << "HELLO WORLD" << '\n';
+    std::cout << "foo(): "<< foo() << '\n';
+    return 0;
+}
+그럼 빌드 시에 unused variable 오류가 발생한다.
+seongjin@seongjin-ubuntu:~/workspace2/playground/playground/pack/build$ cmake ..
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/seongjin/workspace2/playground/playground/pack/build
+seongjin@seongjin-ubuntu:~/workspace2/playground/playground/pack/build$ make
+Scanning dependencies of target program
+[ 33%] Building CXX object CMakeFiles/program.dir/main.cpp.o
+/home/seongjin/workspace2/playground/playground/pack/main.cpp: In function ‘int main()’:
+/home/seongjin/workspace2/playground/playground/pack/main.cpp:6:9: error: unused variable ‘i’ [-Werror=unused-variable]
+    6 |     int i;
+      |         ^
+cc1plus: all warnings being treated as errors
+make[2]: *** [CMakeFiles/program.dir/build.make:63: CMakeFiles/program.dir/main.cpp.o] 오류 1
+make[1]: *** [CMakeFiles/Makefile2:76: CMakeFiles/program.dir/all] 오류 2
+make: *** [Makefile:84: all] 오류 2
+
+
+## CMake 에서의 기본 개념 Target 과 Property
+앞서 target_compile_options 명령을 통해서 program 을 빌드할 때 컴파일 옵션을 줄 수 있었다.
+그렇다면 CMake 에서 말하는 타겟(target) 이란 무엇일까
+쉽게 말해서 타겟이란 프로그램을 구성하는 요소들이라 보면 된다.
+예를 들어 위 처럼 실행 파일이 될 수도 있고, 라이브러리 파일이 될 수도 있다.
+
+CMake 의 모든 명령들은 이 타겟들을 기준으로 돌아간다. 그로기 각 타겟에는 속성(Property) 을 정의할 수 있는데, 
+위와 같이 컴파일 옵션을 주는 것도 program 이라는 타겟에 컴파일 옵션을 설저하는 것이라 볼 수 있다.
+그 외에도 어떠한 라이브러리를 링크하는 것인지, include 하는 파일은 어디서 보는지 등등의 여러가지 속성들을 정의할 수 있다.
+
+아무튼 모든 CMake 명령은 그냥 타겟을 정의하고 (add_executable 와 같이), 해당 타겟들의 속성을 지정하는 명령들(target_compile_options 처럼) 로 이루어진 것이라 보면 된다.
+
+
+## include 경로 지정하기
+CMake 에서는 컴파일 시에 헤더 파일들을 찾을 경로의 위치를 지정할 수 있다. 
+보통 컴파일러는 #include <> 의 형태로 include 되는 헤더 파일들을 시스템 경로에서 찾고, #include "" 형태로 include 된 헤더 파일의 경우는
+따로 지정하지 않는 이상 현재 코드의 위치를 기준으로 찾는다.
+
+하지만 경우에 따라서(특히 나중에 라이브러리 만들 시에 더욱) 헤더 파일들을 다른 곳에 위치시키는 경우가 있는데 
+컴파일러가 해당 파일들을 찾기 위해서는 컴파일 시에 따로경로를 지정해줘야 한다.
+
+예를 들어 foo.h 라는 헤더파일을 includes 라는 디렉터리 안에 있다고 해보자
+그렇다면 CMakeLists.txt 에 includes 라는 디렉토리를 헤더 파일 경로 탐색 시 확인하라고 알려줘야 한다.
+target_include_directories(program PUBLIC ${CMAKE_SOURCE_DIR}/includes)
+
+사용 방법은 아래와 같다.
+
+target_include_directories(<실행 파일 이름> PUBLIC <경로1> <경로2> ...)
+
+위 경우 ${CMAKE_SOURCE_DIR}/includes 를 헤더 파일 탐색 경로에 추가하고 있다. 한 가지 중요한 점은 CMake 에서 디렉토리의 경로를 지정할 때
+웬만하면절대 경로를 쓰지 않는 것이 좋다. 왜냐하면 CMake 의 가장 큰 장점으로 여러 플랫폼에서 사용할 수 있다 인데, 절대 경로로 설정할 경우 
+다른 시스템에서 사용할 수 없기 때문이다.
+
+${CMAKE_SOURCE_DIR} 는 CMake 에서 기본으로 제공하는 변수로, 최상위 CMakeLists.txt, 즉 cmake .. 할 때 읽어들이는 CMakeLists.txt 의 경로를 의미한다.
+다시 말해, 프로젝트의 경로라고 볼 수 있다. 따라서 ${CMAKE_SOURCE_DIR}/includes 는 현재 프로젝트 경로 안에 includes 디렉토리라 보면 된다.
+
+
+## 라이브러리 만들기
+보통 어느 정도 규모가 큰 C++ 프로젝트의 경우 아래와 같은 구조를 가진다.
+외부라이브러리       외부라이브러리        외부라이브러리
+           \         /         \        /
+            라이브러리1         라이브러리2
+                      \        /
+                       실행파일
+보통 라이브러리라고 하면 특정 역할을 수행하는 코드를 모아 놓은 것이라 보면 된다.
+예를 들어서 C++ 에 파일 시스템 관련 작업을 하는 것을 모아 놓은 <filesystem> 라이브러리가 있는 것처럼
+
+C++ 로 개발을 하게 되면 프로그램의 여러가지 요소들을 그냥 하나의 거대한 라이브러리로 만드는 것보다 각각의 요소들로 쪼개서 만드는 경우가 많다.
+이유는 다음과 같다.
+1. 라이브러리로 쪼개지 않고 하나의 거대한 실행 파일로 관리하게 되면, 코드가 바뀔 때 마다 전체를 다시 컴파일 해야 한다. 반면의 라이브러리의 경우 바뀌지 않은 부분은 컴파일 하지 않아도 되서 (링킹만 하면 됨) 개발 속도가 빠르다.
+2. 라이브러리의 각 요소들을 전체를 한꺼번에 묶어 놓았을 때 보다 테스팅 하기 용이하다.
+
+위 그림에서 나온 프로젝트의 경우 실행 파일을 만들기 위해 두개의 라이브러리들이 사용된다. 그리고 각 라이브러리는 또 다른 외부 라이브러리들을 참조하고 있음을 알 수 있다.
+
+이와 같은 구성을 그냥 make 로 작업하였으면 꽤나 골치가 아프다.
+성공적으로 빌드하기 위해서는
+1. 외부 라이브러리들이 잘 설치되어 있는지 확인해야 하고
+2. 라이브러리 1 과 라이브러리 2 가 각각에 맞는 외부 라이브러리들을 참조할 수 할 수 있도록 설정해야 하고
+3. 실행파일을 만들 때 라이브러리 1 과 2 를 사용하도록 해야 합니다.
+
+하지만 CMake 에서는 위와 같은 작업들을 아주 간단하게 할 수 있다.
+예를 들어서 아주 간단한 라이브러리를 만들어 보자.. 
+
+먼저 사용할 라이브러리는 프로젝트의 lib 폴더 안에 만들도록 하자.
+libs/shape.cpp 참고
+그리고나서 헤더파일도 만들자
+includes/shape.h 참고
+
+그렇다면 해당 라이브러리를 어떻게 빌드해야 할지 알려주는 CMakeLists.txt 를 작성해야 한다.
+libs 에 CMakeLists.txt 를 새로 만든다.
+# 정적 라이브러리 shape 만들기
+add_library(shape STATIC shape.cpp)
+# 해당 라이브러리 컴파일 시 사용할 헤더파일 경로
+target_include_directories(shape PUBLIC ${CMAKE_SOURCE_DIR}/includes)
+# 해당 라이브러리를 컴파일 할 옵션
+target_compile_options(shape PRIVATE -Wall -Werror)
+
+먼저 add_library 명령을 통해서 만들어낼 라이브러리 파일을 추가 
+add_library 의 사용법은 간단
+add_library (<라이브러리 이름> [STATIC | SHARED | MODULE ] <소스 1> <소스 2> ...)
+
+중간에 어떠한 형태의 라이브러리를 만들지 설정할 수 있는데 STATIC 으로 명시하면 정적 라이브러리를, 
+SHARED 로 설정하면 동적으로 링크되는 동적 라이브러리를, 
+MODULE 로 명시하면, 동적으로 링크되지는 않지만, dlopen 과 같은 함수로 런타임 시에 불러올 수 있는 라이브러리를 생성
+
+정적 라이브러리와 동적 라이브러리의 차이는 여기 에 정리되어 있느니 참조(https://modoocode.com/321#page-heading-13)
+간단히 말하자면 정적 라이브러리는 프로그램 실행 파일에 라이브러리 코드가 전부 들어 있는 것이도, 
+동적 라이브러리는 프로그램 실행 파일에 라이브러리가 포함되어 있는 것이 아니라 메모리에 라이브러리가 따로 올라가는데 이를 참조하는 형태
+보통 정적으로 링크하면 실행 파일의 크기가 커지는 대신 동적 라이브러리를 사용할 때 보다 더 빠름
+
+여기서 한 가지 중요한 점은 PUBLIC 과 PRIVATE 의 차이.
+기본적으로 CMake 에서 만약에 A 라이브러리가 B 라이브러리를 사용한다면 A 는 B 의 컴파일 옵션들과 헤더 파일 탐색 디렉토리 목록을 물려받게 됨
+정확히 말하면 PUBLIC 으로 설정된 것은 물려 받고, PRIVATE 으로 설정된 것은 물려받지 않음
+
+따라서
+target_include_directories(shape PUBLIC ${CMAKE_SOURCE_DIR}/includes)
+위 문장의 의미는 다음과 같다.
+1. shape 를 컴파일 할 때 헤더 파일 검색 경로에 ${CMAKE_SOURCE_DIR}/includes 를 추가해
+2. shape 를 참조 하는 타겟의 헤더 파일 검색 경로에 ${CMAKE_SOURCE_DIR}/includes 를 추가해
+따라서 예를 들어서 아까 위에서 보았던 program 이 shape 를 사용한다면, program 을 컴파일 할 때 파일 검색 경로에 ${CMAKE_SOURCE_DIR}/includes 가 자동으로 추가
+
+반면에 라이브러리를 컴파일 하는 옵션은
+
+target_compile_options(shape PRIVATE -Wall -Werror)
+PRIVATE 으로 설정됨. 그 이유는 shape 를 빌드할 때에는 -Wall 과 -Werror 옵션을 사용하고 싶지만, shape 를 사용하는 애들에게까지 이 옵션을 강제하고는 싶지 않기 때문
+
+그렇다면 이 shape 를 한 번 program 에 링크해서 사용
+libshape
+   |
+program
+
+cmake_minimum_required(VERSION 3.16)
+
+project(
+    CUSTOM_PACKAGE
+    VERSION 0.1
+    DESCRIPTION "EXAMPLE"
+    LANGUAGES CXX#c: C / cpp: CXX
+)
+
+# 확인할 디렉토리 추가
+add_subdirectory(libs)
+
+add_executable(program main.cpp foo.cpp)
+# 컴파일 옵션
+target_compile_options(program PUBLIC -Wall -Werror)
+# 헤더파일 디렉토리 지정
+target_include_directories(program PUBLIC ${CMAKE_SOURCE_DIR}/includes)
+# program 에 shape 를 링크
+target_link_libraries(program shape)
+
+먼저 add_subdirectory 명령을 통해서 CMake 가 추가로 확인해야 할 디렉토리의 경로를 지정
+그러면 CMake 실행 시에, 해당 디렉토리로 들어가서 그 안에 있는 CMakeLists.txt 도 실행
+
+# program 에 shape 를 링크
+target_link_libraries(program PUBLIC shape)
+그리고 위와 같이 program 을 빌드 할 때 shape 라이브러리를 링크 시킴
+참고로 실행 파일은 PUBLIC 이냐 PRIVATE 이냐의 여부가 크게 중요하지는 않음
+실행 파일을 다른 타겟이 참조할 수 는 없기 때문
+그래서 그냥
+target_link_libraries(program shape)
+
+
+## 다른 라이브러리를 사용하는 라이브러리
+예를 들어서 shape 라이브러리에서 thread 라이브러리를 사용한다고 해보자
+리눅스의 경우 보통 thread 라이브러리를 사용하려면 pthread 라이브러리를 링크시켜 줘야 한다.
