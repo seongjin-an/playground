@@ -1,2 +1,3 @@
-/build/
-/pack/build/
+**/build/
+**/cmake-build-debug
+**/.idea
