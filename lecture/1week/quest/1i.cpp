@@ -23,11 +23,12 @@ int main() {
     }
     for (int j = 0; j < m; j++) {
         cin >> temp;
-        int res = stoi(temp);
+        int res = atoi(temp.c_str());
         if (res != 0) { // 숫자
             cout << arr[res - 1] << '\n';
         } else { // 문자
-            cout << res << '\n';
+            map<string, int>::iterator iter =pocke.find(temp);
+            cout << iter->second << '\n';
         }
     }
     return 0;
