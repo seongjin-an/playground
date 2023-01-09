@@ -31,7 +31,6 @@ int main() {
     Player player3;
     Player player4 = Player();
     Player * player5 = new Player();
-    cout << "///////" << '\n';
     cout << player3 << '\n';
     return 0;
 }
