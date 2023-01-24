@@ -118,6 +118,9 @@ int main() {
     cout << "(*(ptr + 0) + 0): " << (*(ptr + 0) + 0) << '\n';
     cout << "*(*(ptr + 0) + 0): " << *(*(ptr + 0) + 0) << '\n';
     cout << '\n';
+    for (int i = 0; i < 10; i++) delete array2[i];
+    for (int i = 0; i < 10; i++) delete array3[i];
+    delete array3;
 
     return 0;
 }
