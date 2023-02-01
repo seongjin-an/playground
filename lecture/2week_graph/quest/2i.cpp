@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 #include <algorithm>
-// #include <stdlib.h>
+#include <stdlib.h>
 
 using namespace std;
 
@@ -14,7 +14,7 @@ int pos(string txt, int idx) {
     return pos(txt, idx + 1);
 }
 
-int refine(string txt) {
+string refine(string txt) {
     int size = txt.size();
     int i = 0;
     if (size != 1) {
@@ -27,13 +27,16 @@ int refine(string txt) {
         }
     }
     // cout << "txt : " << txt << " / i : " << i << '\n';
-    return atoi(txt.substr(i, size - i).c_str());
+    // return atoi(txt.substr(i, size - i).c_str());
+    return txt.substr(i, size - i);
 }
-
-
+bool cmp(string a, string b) {
+    if (a.size() == b.size()) return a < b;
+    return a.size() < b.size();
+}
 int n;
 string str;
-vector<int> v;
+vector<string> v;
 int main() {
     cin >> n;
     for (int i = 0; i < n; i++) {
@@ -45,13 +48,13 @@ int main() {
                 j++;
             } else {
                 string subStr = str.substr(j, e - j + 1);
-                int t = refine(subStr);
+                string t = refine(subStr);
                 v.push_back(t);
                 j = e + 1;
             }
         }
     }
-    sort(v.begin(), v.end());
+    sort(v.begin(), v.end(), cmp);
     for (int i = 0; i < v.size(); i++) {
         cout << v[i] << '\n';
     }
