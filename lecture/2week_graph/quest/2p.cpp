@@ -30,36 +30,60 @@ int main() {
     }
     vector<bool> vi(v.size() - 3, false);
     vi.insert(vi.end(), 3, true);
+    
+    int minValue = 0;
     do {
+        int curValue = 0;
+        int copiedGraph[8][8] = {};
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                copiedGraph[i][j] = graph[i][j];
+            }
+        }
+        // cout << "checkpoint1\n"; 
+        // cout << "vi.size() : " << vi.size() << '\n';
         for (int i = 0; i < vi.size(); i++) {
             if (vi.at(i)) {
                 int y = v.at(i).first;
                 int x = v.at(i).second;
-                graph[y][x] = 1;
+                // cout << "y : " << y << " / x : " << x << '\n';
+                copiedGraph[y][x] = 1;
             }
         }
 
+        // for (int i = 0; i < n; i++) {
+        //     for (int j = 0; j < m; j++) {
+        //         cout << copiedGraph[i][j] << ' ';
+        //     }
+        //     cout << '\n';
+        // }
+
+
+        // cout << "checkpoint2\n";
         for (int i = 0; i < vt.size(); i++) {
             if (vt.size() >= 10) break;
             int y = vt.at(i).first;
             int x = vt.at(i).second;
-
+            // cout << "y : " << y << " / x : " << x << '\n';
             for (int j = 0; j < 4; j++) {
                 int ny = y + dy[j];
                 int nx = x + dx[j];
                 if (ny < 0 || nx < 0 || ny >= n || nx >= m) continue;
+                if (vt.size() < 10 && copiedGraph[ny][nx] == 0) {
+                    vt.push_back({ny, nx});
+                    copiedGraph[ny][nx] = 2;
+                }
             }
         }
+        // cout << "checkpoint3\n";
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (copiedGraph[i][j] == 0) curValue++;
+            }
+        }
+        min(minValue, curValue);
 
-        for (int i = 0; i < vi.size(); i++) {
-            if (vi.at(i)) {
-                int y = v.at(i).first;
-                int x = v.at(i).second;
-                graph[y][x] = 0;
-            }
-        }
     } while (next_permutation(vi.begin(), vi.end()));
-    
-
+    cout << minValue << '\n';
     return 0;
 }
