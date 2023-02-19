@@ -1,5 +1,5 @@
 #include <iostream>
-#include "stock00.h"
+#include "stock10.h"
 
 void Stock::acquire(const std::string &co, long n, double pr) {
     company = co;

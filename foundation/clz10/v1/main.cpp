@@ -1,5 +1,5 @@
 #include <iostream>
-#include "stock00.h"
+#include "stock10.h"
 #include "test.h"
 
 int main() {
