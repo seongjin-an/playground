@@ -1,0 +1,1 @@
+add_executable(placenew1 placenew1.cpp)
