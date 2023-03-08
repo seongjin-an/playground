@@ -8,6 +8,7 @@ project(
 )
 
 #add_subdirectory(libs)
-add_executable(program main.cpp)
+#add_executable(program main.cpp)
+add_executable(program tempparm.cpp)
 target_include_directories(program PUBLIC ${CMAKE_SOURCE_DIR}/includes)
 #target_link_libraries(program stacktp)
