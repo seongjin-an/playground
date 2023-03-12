@@ -8,3 +8,4 @@ project(
 add_executable(err1 error1.cpp)
 add_executable(err2 error2.cpp)
 add_executable(err3 error3.cpp)
+add_executable(err5 error5_newexcp.cpp)
