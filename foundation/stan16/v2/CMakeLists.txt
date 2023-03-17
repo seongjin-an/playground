@@ -8,3 +8,4 @@ project(
 )
 
 add_executable(copyit copyit.cpp)
+add_executable(inserts inserts.cpp)
