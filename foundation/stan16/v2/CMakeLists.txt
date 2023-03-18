@@ -9,3 +9,6 @@ project(
 
 add_executable(copyit copyit.cpp)
 add_executable(inserts inserts.cpp)
+add_executable(list list.cpp)
+add_executable(setops setops.cpp)
+add_executable(multimap multimap.cpp)
