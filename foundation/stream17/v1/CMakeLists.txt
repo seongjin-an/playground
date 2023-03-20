@@ -8,3 +8,9 @@ project(
 )
 
 add_executable(write write.cpp)
+add_executable(defaults defaults.cpp)
+add_executable(manip manip.cpp)
+add_executable(width width.cpp)
+add_executable(fill fill.cpp)
+add_executable(precise precise.cpp)
+add_executable(showpt showpt.cpp)
