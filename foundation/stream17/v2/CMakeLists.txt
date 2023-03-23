@@ -8,3 +8,4 @@ project(
 )
 
 add_executable(checkit check_it.cpp)
+add_executable(cinexcp cinexcp.cpp)
