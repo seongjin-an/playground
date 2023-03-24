@@ -26,3 +26,9 @@ int main() {
 
     return 0;
 }
+/*
+ int ch;
+ while ((ch = cin.get()) != EOF) {}
+ while ((ch = cin.peek()) != '.' && ch != '\n') {}
+
+ */
