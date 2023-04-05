@@ -38,6 +38,7 @@ int main() {
             arr[i][j] = ch;
         }
     }
+    int maxCount = 0;
     for (int i = 0; i < a; i++) {
         for (int j = 0; j < b; j++) {
             if (arr[i][j] == 'L') {
