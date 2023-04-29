@@ -40,24 +40,19 @@ int main() {
                         int nx = x + dx[k];
                         if (ny < 0 || nx < 0 || ny >= n || nx >= m) continue;
                         if (arr[ny][nx] != 'L') continue;
-                        if (visited[ny][nx] != 0) continue;
+                        if (visited[ny][nx]) continue;
                         visited[ny][nx] = visited[y][x] + 1;
                         st.push({ny, nx});
                     }
                 }
-                cout << "(" << i << ", " << j << ")\n";
-                for (int a = 0; a < n; a++) {
-                    for (int b = 0; b < m; b++) {
-                        cout << visited[a][b] << ' ';
-                    }
-                    cout << '\n';
-                }
-                cout << '\n';
-                cout << '\n';
-//                maxCount = max(maxCount, *max_element(&visited[0][0], &visited[n - 1][m]));
+                maxCount = max(maxCount, *max_element(&visited[0][0], &visited[n - 1][m]));
             }
         }
     }
-//    cout << maxCount << '\n';
+    cout << maxCount - 1 << '\n';
+    for (int i = 0; i < n; i++) {
+        delete [] arr[i];
+    }
+    delete [] arr;
     return 0;
 }
