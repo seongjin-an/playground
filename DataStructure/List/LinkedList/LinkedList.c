@@ -1,75 +1,112 @@
-#include <stdio.h>
-#include <stdlib.h>
-
-typedef int ElementType;
-
-//struct Node {
-//    ElementType Data;
-//    struct Node* NextNode;
-//};
-
-typedef struct tagNode {
-    ElementType Data;
-    struct tagNode* NextNode;
-} Node;
+#include "LinkedList.h"
 
 // 노드 생성
-Node* SLL_CreateNode(ElementType NewData) {
+Node* SLL_CreateNode(ElementType NewData) 
+{
     Node* NewNode = (Node*)malloc(sizeof(Node));
+
     NewNode->Data = NewData;
     NewNode->NextNode = NULL;
 
     return NewNode;
 }
 
-void SLL_DestroyNode(Node* Node) {
+// 노드 소멸
+void SLL_DestroyNode(Node* Node) 
+{
     free(Node);
 }
 
-void SLL_AppendNode(Node** Head, Node* NewNode) {
-    if ((*Head) == NULL) {
-        *Head = NewNode;
-    } else {
+// 노드 추가
+void SLL_AppendNode(Node** Head, Node* NewNode) 
+{
+    if( (*Head) == NULL )
+    {
+        *Head= NewNode;
+    }
+    else 
+    {
         Node* Tail = (*Head);
-        while (Tail->NextNode != NULL) {
+        while ( Tail->NextNode!= NULL )
+        {
             Tail = Tail->NextNode;
         }
+        
         Tail->NextNode = NewNode;
     }
 }
 
-void print(Node** Head) {
-    // do {
-    //     ElementType el = (*Head)->Data;
-    //     printf("elementType: %d\n", el);
-    //     Head = &((*Head)->NextNode);
-    // } while (*Head != NULL);
-    do {
-        ElementType el = (*Head)->Data;
-        printf("elementType: %d\n", el);
-        Head = &((*Head)->NextNode);
-    } while ((*Head) != NULL);
+// 노드 삽입
+void SLL_InsertAfter(Node* Current, Node* NewNode) 
+{
+    NewNode->NextNode = Current->NextNode;
+    Current->NextNode = NewNode;
 }
 
-int main() {
-    Node* MyNode = SLL_CreateNode(117);
-    free(MyNode);
-
-    Node* List = NULL;
-    Node* NewNode = NULL;
-    NewNode = SLL_CreateNode(117);
-    SLL_AppendNode(&List, NewNode);
-    NewNode = SLL_CreateNode(119);
-    SLL_AppendNode(&List, NewNode);
-    NewNode = SLL_CreateNode(121);
-    SLL_AppendNode(&List, NewNode);
-
-    print(&List);
-    while (List->NextNode != NULL) {
-        NewNode = List;
-        List = List->NextNode;
-        free(NewNode);
+void SLL_InsertNewHead(Node** Head, Node* NewHead) 
+{
+    if ( Head == NULL )
+    {
+        (*Head) = NewHead;
     }
-    free(List);
-    return 0;
+    else
+    {
+        NewHead->NextNode = (*Head);
+        (*Head) = NewHead;
+    }
+}
+
+// 노드 제거
+void SLL_RemoveNode(Node** Head, Node* Remove) 
+{
+    if ( *Head == Remove )
+    {
+        *Head = Remove->NextNode;
+    }
+    else 
+    {
+        Node* Current = *Head;
+        while ( Current != NULL && Current->NextNode != Remove )
+        {
+            Current = Current->NextNode;
+        }
+
+        if ( Current!= NULL )             
+            Current->NextNode = Remove->NextNode;
+    }
+}
+
+
+// 노드 탐색
+Node* SLL_GetNodeAt(Node*Head, int Location) 
+{
+    Node* Current = Head;
+
+    while ( Current != NULL && (--Location) >= 0 ) 
+    {
+        Current = Current->NextNode;
+    }
+    return Current;
+}
+
+// 노드 개수 세기
+int SLL_GetNodeCount(Node* Head)
+{
+    int Count = 0;
+    Node* Current = Head;
+
+    while ( Current != NULL ) 
+    {
+        Current = Current->NextNode;
+        Count++;
+    }
+    return Count;
+}
+
+void SLL_PrintNodes(Node* Head) {
+    int Count = SLL_GetNodeCount(Head);
+    for (int i = 0; i < Count; i++) {
+        Node* Current = SLL_GetNodeAt(Head, i);
+        printf("List[%d] : %d\n", i, Current->Data);
+    }
 }
