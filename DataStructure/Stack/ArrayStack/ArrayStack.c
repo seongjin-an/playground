@@ -25,18 +25,20 @@ void AS_DestroyStack(ArrayStack2* Stack)
 void AS_Push(ArrayStack2* Stack, ElementType Data) 
 {
     Stack->Top++;
-    Stack->Nodes[Stack->Top].Data = Data;
+    // Stack->Nodes[Stack->Top].Data = Data;
+    (*(Stack->Nodes + Stack->Top)).Data = Data;
 }
 
 ElementType AS_Pop(ArrayStack2* Stack)
 {
     int Position = Stack->Top--;
-    return Stack->Nodes[Position].Data;
+    // return Stack->Nodes[Position].Data;
+    return (*(Stack->Nodes + Position)).Data;
 }
 
 ElementType AS_Top(ArrayStack2* Stack)
 {
-    return Stack->Nodes[Stack->Top].Data;
+    return (*(Stack->Nodes + Stack->Top)).Data;
 }
 
 int AS_GetSize(ArrayStack2* Stack)
