@@ -68,7 +68,25 @@ int IsPrior(char OperatorInStack, char OperatorInToken)
 {
     return GetPriority(OperatorInStack, 1) > GetPriority(OperatorInToken, 0);
 }
-
+/*
+Enter Infix Expression:1+3.334/(4.28*(110-7729))
+Position: 0 / InfixExpression[Position]: 1
+Position: 1 / InfixExpression[Position]: +
+Position: 2 / InfixExpression[Position]: 3
+Position: 7 / InfixExpression[Position]: /
+Position: 8 / InfixExpression[Position]: (
+Position: 9 / InfixExpression[Position]: 4
+Position: 13 / InfixExpression[Position]: *
+Position: 14 / InfixExpression[Position]: (
+Position: 15 / InfixExpression[Position]: 1
+Position: 18 / InfixExpression[Position]: -
+Position: 19 / InfixExpression[Position]: 7
+Position: 23 / InfixExpression[Position]: )
+Position: 24 / InfixExpression[Position]: )
+Infix:1+3.334/(4.28*(110-7729))
+Postfix:1 3.334 4.28 110 7729 -*/+
+Calculation Result : 0.999898
+*/
 void GetPostfix(char* InfixExpression, char* PostfixExpression)
 {
     LinkedListStack* Stack;
@@ -82,6 +100,7 @@ void GetPostfix(char* InfixExpression, char* PostfixExpression)
 
     while (Position < Length)
     {
+        printf("Position: %d / InfixExpression[Position]: %c\n", Position, InfixExpression[Position]);
         Position += GetNextToken(&InfixExpression[Position], Token, &Type);
 
         if (Type == OPERAND)
