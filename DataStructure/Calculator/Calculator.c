@@ -84,7 +84,7 @@ Position: 19 / InfixExpression[Position]: 7
 Position: 23 / InfixExpression[Position]: )
 Position: 24 / InfixExpression[Position]: )
 Infix:1+3.334/(4.28*(110-7729))
-Postfix:1 3.334 4.28 110 7729 -*/+
+Postfix:1 3.334 4.28 110 7729 - * / +
 Calculation Result : 0.999898
 */
 void GetPostfix(char* InfixExpression, char* PostfixExpression)
