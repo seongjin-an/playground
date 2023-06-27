@@ -43,7 +43,7 @@ void LCRS_PrintTree(LCRSNode* Node, int Depth)
 {
     // 들여쓰기
     int i = 0;
-    for (i = 0; i < Depth; i++)
+    for (i = 0; i < Depth - 1; i++)
         printf("   ");
     if (Depth > 0)
         printf("+--");
