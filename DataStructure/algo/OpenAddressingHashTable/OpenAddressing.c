@@ -94,7 +94,9 @@ int OAHT_Hash(KeyType Key, int KeyLength, int TableSize)
     {
         HashValue = (HashValue << 3) + Key[i];
     }
+    
     HashValue = HashValue % TableSize;
+    // printf("HashValue:%d\n", HashValue);
     return HashValue;
 }
 
