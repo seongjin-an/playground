@@ -1,11 +1,13 @@
 #include "Graph.h"
 #include "MST.h"
 
+// 최소 신장 트리: 프림 / 크루스칼 알고리즘
 int main(void)
 {
     // 그래프 생성
     Graph* graph = CreateGraph();
     Graph* PrimMST = CreateGraph();
+    Graph* KruskalMST = CreateGraph();
 
     // 정점 생성
     Vertex* A = CreateVertex('A');
@@ -67,9 +69,14 @@ int main(void)
     printf("Prim's Algorithm...\n");
     Prim(graph, B, PrimMST);
     PrintGraph(PrimMST);
+
+    printf("Kruskal's Algorithm...\n");
+    Kruskal(graph, KruskalMST);
+    PrintGraph(KruskalMST);
     
     // 그래프 소멸
     DestroyGraph(PrimMST);
+    DestroyGraph(KruskalMST);
     DestroyGraph(graph);
 
     return 0;
